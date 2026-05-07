@@ -1,0 +1,137 @@
+2026-05-06 11:45:25 [DETECT] ------- Detection run started -------
+2026-05-06 11:45:25 [DETECT] Current NTP server value: time.windows.com,0x9
+2026-05-06 11:45:25 [DETECT] RESULT: Non-Compliant - 'time.windows.com' is set as NTP server
+2026-05-06 11:45:30 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 11:45:30 [REMEDIATE] Target NTP server: ldbtime.bcliquor.com
+2026-05-06 11:45:30 [REMEDIATE] Step 1: Configuring W32tm...
+2026-05-06 11:45:30 [REMEDIATE] W32tm config output: The command completed successfully.
+2026-05-06 11:45:30 [REMEDIATE] Step 2: Restarting Windows Time service...
+2026-05-06 11:45:31 [REMEDIATE] Windows Time service restarted successfully
+2026-05-06 11:45:34 [REMEDIATE] Step 3: Forcing NTP resync...
+2026-05-06 11:45:35 [REMEDIATE] W32tm resync output: Sending resync command to local computer The command completed successfully.
+2026-05-06 11:45:35 [REMEDIATE] Confirmed NTP server in registry: ldbtime.bcliquor.com
+2026-05-06 11:45:35 [REMEDIATE] RESULT: Remediation completed successfully
+2026-05-06 11:45:41 [DETECT] ------- Detection run started -------
+2026-05-06 11:45:41 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 11:45:41 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 12:47:37 [DETECT] ------- Detection run started -------
+2026-05-06 12:47:37 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 12:47:37 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 13:49:54 [DETECT] ------- Detection run started -------
+2026-05-06 13:49:54 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 13:49:54 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 14:50:27 [DETECT] ------- Detection run started -------
+2026-05-06 14:50:28 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 14:50:28 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 15:17:45 [DETECT] ------- Detection run started -------
+2026-05-06 15:17:45 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 15:17:45 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 15:51:01 [DETECT] ------- Detection run started -------
+2026-05-06 15:51:01 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 15:51:01 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 16:51:34 [DETECT] ------- Detection run started -------
+2026-05-06 16:51:34 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 16:51:34 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 17:52:06 [DETECT] ------- Detection run started -------
+2026-05-06 17:52:06 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 17:52:06 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 18:52:39 [DETECT] ------- Detection run started -------
+2026-05-06 18:52:39 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 18:52:39 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 19:45:26 [DETECT] ------- Detection run started -------
+2026-05-06 19:45:26 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 19:45:26 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 20:45:45 [DETECT] ------- Detection run started -------
+2026-05-06 20:45:45 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 20:45:45 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 21:45:55 [DETECT] ------- Detection run started -------
+2026-05-06 21:45:55 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 21:45:55 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 22:46:05 [DETECT] ------- Detection run started -------
+2026-05-06 22:46:05 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 22:46:05 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-06 23:46:15 [DETECT] ------- Detection run started -------
+2026-05-06 23:46:15 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-06 23:46:15 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 00:46:25 [DETECT] ------- Detection run started -------
+2026-05-07 00:46:26 [DETECT] Current NTP server value: time.windows.com,0x9
+2026-05-07 00:46:26 [DETECT] RESULT: Non-Compliant - 'time.windows.com' is set as NTP server
+2026-05-07 00:46:32 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 00:46:32 [REMEDIATE] Target NTP server: ldbtime.bcliquor.com
+2026-05-07 00:46:32 [REMEDIATE] Step 1: Configuring W32tm...
+2026-05-07 00:46:32 [REMEDIATE] W32tm config output: The command completed successfully.
+2026-05-07 00:46:32 [REMEDIATE] Step 2: Restarting Windows Time service...
+2026-05-07 00:46:32 [REMEDIATE] Windows Time service restarted successfully
+2026-05-07 00:46:35 [REMEDIATE] Step 4: Forcing NTP resync...
+2026-05-07 00:46:37 [REMEDIATE] W32tm resync output: Sending resync command to local computer The command completed successfully.
+2026-05-07 00:46:37 [REMEDIATE] Step 5: Updating Settings UI registry (DateTime\Servers)...
+2026-05-07 00:46:37 [REMEDIATE] UI registry updated - slot 1 set to 'ldbtime.bcliquor.com', default pointer set to '1'
+2026-05-07 00:46:37 [REMEDIATE] Step 6: Confirming both registry locations...
+2026-05-07 00:46:37 [REMEDIATE] Confirmed W32Time registry : ldbtime.bcliquor.com
+2026-05-07 00:46:37 [REMEDIATE] Confirmed UI registry      : ldbtime.bcliquor.com
+2026-05-07 00:46:37 [REMEDIATE] RESULT: Remediation completed successfully - both W32Time and Settings UI updated
+2026-05-07 00:46:43 [DETECT] ------- Detection run started -------
+2026-05-07 00:46:43 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 00:46:43 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 01:47:04 [DETECT] ------- Detection run started -------
+2026-05-07 01:47:05 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 01:47:05 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 02:48:24 [DETECT] ------- Detection run started -------
+2026-05-07 02:48:24 [DETECT] Current NTP server value: time.windows.com,0x9
+2026-05-07 02:48:24 [DETECT] RESULT: Non-Compliant - 'time.windows.com' is set as NTP server
+2026-05-07 02:48:30 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 02:48:30 [REMEDIATE] Target NTP server: ldbtime.bcliquor.com
+2026-05-07 02:48:30 [REMEDIATE] Step 1: Configuring W32tm...
+2026-05-07 02:48:30 [REMEDIATE] W32tm config output: The command completed successfully.
+2026-05-07 02:48:30 [REMEDIATE] Step 2: Restarting Windows Time service...
+2026-05-07 02:48:30 [REMEDIATE] Windows Time service restarted successfully
+2026-05-07 02:48:33 [REMEDIATE] Step 4: Forcing NTP resync...
+2026-05-07 02:48:34 [REMEDIATE] W32tm resync output: Sending resync command to local computer The command completed successfully.
+2026-05-07 02:48:34 [REMEDIATE] Step 5: Updating Settings UI registry (DateTime\Servers)...
+2026-05-07 02:48:35 [REMEDIATE] UI registry updated - slot 1 set to 'ldbtime.bcliquor.com', default pointer set to '1'
+2026-05-07 02:48:35 [REMEDIATE] Step 6: Confirming both registry locations...
+2026-05-07 02:48:35 [REMEDIATE] Confirmed W32Time registry : ldbtime.bcliquor.com
+2026-05-07 02:48:35 [REMEDIATE] Confirmed UI registry      : ldbtime.bcliquor.com
+2026-05-07 02:48:35 [REMEDIATE] RESULT: Remediation completed successfully - both W32Time and Settings UI updated
+2026-05-07 02:48:40 [DETECT] ------- Detection run started -------
+2026-05-07 02:48:41 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 02:48:41 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 03:48:58 [DETECT] ------- Detection run started -------
+2026-05-07 03:48:58 [DETECT] Current NTP server value: time.windows.com,0x9
+2026-05-07 03:48:58 [DETECT] RESULT: Non-Compliant - 'time.windows.com' is set as NTP server
+2026-05-07 03:49:04 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 03:49:04 [REMEDIATE] Target NTP server: ldbtime.bcliquor.com
+2026-05-07 03:49:04 [REMEDIATE] Step 1: Configuring W32tm...
+2026-05-07 03:49:04 [REMEDIATE] W32tm config output: The command completed successfully.
+2026-05-07 03:49:04 [REMEDIATE] Step 2: Restarting Windows Time service...
+2026-05-07 03:49:04 [REMEDIATE] Windows Time service restarted successfully
+2026-05-07 03:49:07 [REMEDIATE] Step 4: Forcing NTP resync...
+2026-05-07 03:49:09 [REMEDIATE] W32tm resync output: Sending resync command to local computer The command completed successfully.
+2026-05-07 03:49:09 [REMEDIATE] Step 5: Updating Settings UI registry (DateTime\Servers)...
+2026-05-07 03:49:09 [REMEDIATE] UI registry updated - slot 1 set to 'ldbtime.bcliquor.com', default pointer set to '1'
+2026-05-07 03:49:09 [REMEDIATE] Step 6: Confirming both registry locations...
+2026-05-07 03:49:09 [REMEDIATE] Confirmed W32Time registry : ldbtime.bcliquor.com
+2026-05-07 03:49:09 [REMEDIATE] Confirmed UI registry      : ldbtime.bcliquor.com
+2026-05-07 03:49:09 [REMEDIATE] RESULT: Remediation completed successfully - both W32Time and Settings UI updated
+2026-05-07 03:49:15 [DETECT] ------- Detection run started -------
+2026-05-07 03:49:15 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 03:49:15 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 04:49:26 [DETECT] ------- Detection run started -------
+2026-05-07 04:49:26 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 04:49:26 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 05:51:24 [DETECT] ------- Detection run started -------
+2026-05-07 05:51:25 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 05:51:25 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 06:51:36 [DETECT] ------- Detection run started -------
+2026-05-07 06:51:36 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 06:51:36 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 07:51:47 [DETECT] ------- Detection run started -------
+2026-05-07 07:51:47 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 07:51:47 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 08:51:58 [DETECT] ------- Detection run started -------
+2026-05-07 08:51:58 [DETECT] Current NTP server value: ldbtime.bcliquor.com
+2026-05-07 08:51:58 [DETECT] RESULT: Compliant - NTP server is not time.windows.com (Current: ldbtime.bcliquor.com)
+2026-05-07 08:58:24 [DETECT] ------- Detection run started -------
+2026-05-07 08:58:24 [DETECT] W32Time NTP server value : ldbtime.bcliquor.com
+2026-05-07 08:58:24 [DETECT] Settings UI NTP value    : ldbtime.bcliquor.com (slot '1')
+2026-05-07 08:58:24 [DETECT] RESULT: Compliant - Both W32Time and Settings UI are set to ldbtime.bcliquor.com

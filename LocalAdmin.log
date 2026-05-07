@@ -1,0 +1,254 @@
+2026-05-06 11:45:52 [DETECT] ------- Detection run started -------
+2026-05-06 11:45:52 [DETECT] Account 'Admin' exists      : True
+2026-05-06 11:45:52 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 11:45:52 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 11:45:57 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 11:45:57 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 11:45:57 [REMEDIATE] Disabling local account 'Admin'...
+2026-05-06 11:45:58 [REMEDIATE] RESULT: Remediation successful - 'Admin' account is now disabled
+2026-05-06 11:46:03 [DETECT] ------- Detection run started -------
+2026-05-06 11:46:03 [DETECT] Account 'Admin' exists      : True
+2026-05-06 11:46:03 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 11:46:03 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 12:47:48 [DETECT] ------- Detection run started -------
+2026-05-06 12:47:48 [DETECT] Account 'Admin' exists      : True
+2026-05-06 12:47:48 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 12:47:48 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 12:47:54 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 12:47:54 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 12:47:54 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 12:47:59 [DETECT] ------- Detection run started -------
+2026-05-06 12:48:00 [DETECT] Account 'Admin' exists      : True
+2026-05-06 12:48:00 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 12:48:00 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 13:50:05 [DETECT] ------- Detection run started -------
+2026-05-06 13:50:05 [DETECT] Account 'Admin' exists      : True
+2026-05-06 13:50:05 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 13:50:05 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 13:50:11 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 13:50:11 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 13:50:11 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 13:50:16 [DETECT] ------- Detection run started -------
+2026-05-06 13:50:16 [DETECT] Account 'Admin' exists      : True
+2026-05-06 13:50:16 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 13:50:16 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 14:50:38 [DETECT] ------- Detection run started -------
+2026-05-06 14:50:38 [DETECT] Account 'Admin' exists      : True
+2026-05-06 14:50:38 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 14:50:38 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 14:50:44 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 14:50:44 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 14:50:44 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 14:50:50 [DETECT] ------- Detection run started -------
+2026-05-06 14:50:50 [DETECT] Account 'Admin' exists      : True
+2026-05-06 14:50:50 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 14:50:50 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 15:51:11 [DETECT] ------- Detection run started -------
+2026-05-06 15:51:11 [DETECT] Account 'Admin' exists      : True
+2026-05-06 15:51:11 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 15:51:11 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 15:51:17 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 15:51:17 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 15:51:17 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 15:51:23 [DETECT] ------- Detection run started -------
+2026-05-06 15:51:23 [DETECT] Account 'Admin' exists      : True
+2026-05-06 15:51:23 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 15:51:23 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 16:51:44 [DETECT] ------- Detection run started -------
+2026-05-06 16:51:44 [DETECT] Account 'Admin' exists      : True
+2026-05-06 16:51:44 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 16:51:44 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 16:51:50 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 16:51:50 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 16:51:50 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 16:51:56 [DETECT] ------- Detection run started -------
+2026-05-06 16:51:56 [DETECT] Account 'Admin' exists      : True
+2026-05-06 16:51:56 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 16:51:56 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 17:52:17 [DETECT] ------- Detection run started -------
+2026-05-06 17:52:17 [DETECT] Account 'Admin' exists      : True
+2026-05-06 17:52:17 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 17:52:17 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 17:52:23 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 17:52:23 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 17:52:23 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 17:52:28 [DETECT] ------- Detection run started -------
+2026-05-06 17:52:29 [DETECT] Account 'Admin' exists      : True
+2026-05-06 17:52:29 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 17:52:29 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 18:52:50 [DETECT] ------- Detection run started -------
+2026-05-06 18:52:50 [DETECT] Account 'Admin' exists      : True
+2026-05-06 18:52:50 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 18:52:50 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 18:52:56 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 18:52:56 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 18:52:56 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 18:53:01 [DETECT] ------- Detection run started -------
+2026-05-06 18:53:02 [DETECT] Account 'Admin' exists      : True
+2026-05-06 18:53:02 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 18:53:02 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 19:53:12 [DETECT] ------- Detection run started -------
+2026-05-06 19:53:13 [DETECT] Account 'Admin' exists      : True
+2026-05-06 19:53:13 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 19:53:13 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 19:53:18 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 19:53:18 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 19:53:18 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 19:53:24 [DETECT] ------- Detection run started -------
+2026-05-06 19:53:24 [DETECT] Account 'Admin' exists      : True
+2026-05-06 19:53:24 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 19:53:24 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 20:53:34 [DETECT] ------- Detection run started -------
+2026-05-06 20:53:35 [DETECT] Account 'Admin' exists      : True
+2026-05-06 20:53:35 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 20:53:35 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 20:53:40 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 20:53:40 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 20:53:40 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 20:53:46 [DETECT] ------- Detection run started -------
+2026-05-06 20:53:46 [DETECT] Account 'Admin' exists      : True
+2026-05-06 20:53:46 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 20:53:46 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 21:53:56 [DETECT] ------- Detection run started -------
+2026-05-06 21:53:57 [DETECT] Account 'Admin' exists      : True
+2026-05-06 21:53:57 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 21:53:57 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 21:54:02 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 21:54:02 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 21:54:02 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 21:54:08 [DETECT] ------- Detection run started -------
+2026-05-06 21:54:08 [DETECT] Account 'Admin' exists      : True
+2026-05-06 21:54:08 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 21:54:08 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 22:54:18 [DETECT] ------- Detection run started -------
+2026-05-06 22:54:19 [DETECT] Account 'Admin' exists      : True
+2026-05-06 22:54:19 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 22:54:19 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 22:54:24 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 22:54:24 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 22:54:24 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 22:54:30 [DETECT] ------- Detection run started -------
+2026-05-06 22:54:30 [DETECT] Account 'Admin' exists      : True
+2026-05-06 22:54:30 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 22:54:30 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 23:54:40 [DETECT] ------- Detection run started -------
+2026-05-06 23:54:40 [DETECT] Account 'Admin' exists      : True
+2026-05-06 23:54:40 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 23:54:40 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-06 23:54:46 [REMEDIATE] ------- Remediation run started -------
+2026-05-06 23:54:46 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-06 23:54:46 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-06 23:54:52 [DETECT] ------- Detection run started -------
+2026-05-06 23:54:52 [DETECT] Account 'Admin' exists      : True
+2026-05-06 23:54:52 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-06 23:54:52 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 00:55:02 [DETECT] ------- Detection run started -------
+2026-05-07 00:55:03 [DETECT] Account 'Admin' exists      : True
+2026-05-07 00:55:03 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 00:55:03 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 00:55:09 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 00:55:09 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 00:55:09 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 00:55:15 [DETECT] ------- Detection run started -------
+2026-05-07 00:55:15 [DETECT] Account 'Admin' exists      : True
+2026-05-07 00:55:15 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 00:55:15 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 01:55:25 [DETECT] ------- Detection run started -------
+2026-05-07 01:55:26 [DETECT] Account 'Admin' exists      : True
+2026-05-07 01:55:26 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 01:55:26 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 01:55:32 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 01:55:32 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 01:55:32 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 01:55:38 [DETECT] ------- Detection run started -------
+2026-05-07 01:55:38 [DETECT] Account 'Admin' exists      : True
+2026-05-07 01:55:38 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 01:55:38 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 02:55:49 [DETECT] ------- Detection run started -------
+2026-05-07 02:55:49 [DETECT] Account 'Admin' exists      : True
+2026-05-07 02:55:49 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 02:55:49 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 02:55:55 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 02:55:55 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 02:55:55 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 02:56:01 [DETECT] ------- Detection run started -------
+2026-05-07 02:56:01 [DETECT] Account 'Admin' exists      : True
+2026-05-07 02:56:01 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 02:56:01 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 03:56:12 [DETECT] ------- Detection run started -------
+2026-05-07 03:56:12 [DETECT] Account 'Admin' exists      : True
+2026-05-07 03:56:12 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 03:56:12 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 03:56:18 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 03:56:18 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 03:56:18 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 03:56:24 [DETECT] ------- Detection run started -------
+2026-05-07 03:56:24 [DETECT] Account 'Admin' exists      : True
+2026-05-07 03:56:24 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 03:56:24 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 04:56:35 [DETECT] ------- Detection run started -------
+2026-05-07 04:56:35 [DETECT] Account 'Admin' exists      : True
+2026-05-07 04:56:35 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 04:56:35 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 04:56:41 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 04:56:41 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 04:56:41 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 04:56:47 [DETECT] ------- Detection run started -------
+2026-05-07 04:56:47 [DETECT] Account 'Admin' exists      : True
+2026-05-07 04:56:47 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 04:56:47 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 05:56:57 [DETECT] ------- Detection run started -------
+2026-05-07 05:56:58 [DETECT] Account 'Admin' exists      : True
+2026-05-07 05:56:58 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 05:56:58 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 05:57:04 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 05:57:04 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 05:57:04 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 05:57:10 [DETECT] ------- Detection run started -------
+2026-05-07 05:57:10 [DETECT] Account 'Admin' exists      : True
+2026-05-07 05:57:10 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 05:57:10 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 06:57:21 [DETECT] ------- Detection run started -------
+2026-05-07 06:57:21 [DETECT] Account 'Admin' exists      : True
+2026-05-07 06:57:21 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 06:57:21 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 06:57:27 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 06:57:27 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 06:57:27 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 06:57:33 [DETECT] ------- Detection run started -------
+2026-05-07 06:57:33 [DETECT] Account 'Admin' exists      : True
+2026-05-07 06:57:33 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 06:57:33 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 07:57:44 [DETECT] ------- Detection run started -------
+2026-05-07 07:57:44 [DETECT] Account 'Admin' exists      : True
+2026-05-07 07:57:44 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 07:57:44 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 07:57:50 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 07:57:50 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 07:57:50 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 07:57:56 [DETECT] ------- Detection run started -------
+2026-05-07 07:57:56 [DETECT] Account 'Admin' exists      : True
+2026-05-07 07:57:56 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 07:57:56 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 08:58:07 [DETECT] ------- Detection run started -------
+2026-05-07 08:58:07 [DETECT] Account 'Admin' exists      : True
+2026-05-07 08:58:07 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 08:58:07 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 08:58:13 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 08:58:13 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 08:58:13 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 08:58:19 [DETECT] ------- Detection run started -------
+2026-05-07 08:58:19 [DETECT] Account 'Admin' exists      : True
+2026-05-07 08:58:19 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 08:58:19 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 09:16:53 [DETECT] ------- Detection run started -------
+2026-05-07 09:16:54 [DETECT] Account 'Admin' exists      : True
+2026-05-07 09:16:54 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 09:16:54 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
+2026-05-07 09:17:00 [REMEDIATE] ------- Remediation run started -------
+2026-05-07 09:17:00 [REMEDIATE] Pre-remediation state - Admin exists: True | LocalAdmin exists: True
+2026-05-07 09:17:00 [REMEDIATE] RESULT: Admin account already disabled - no action required
+2026-05-07 09:17:06 [DETECT] ------- Detection run started -------
+2026-05-07 09:17:06 [DETECT] Account 'Admin' exists      : True
+2026-05-07 09:17:06 [DETECT] Account 'LocalAdmin' exists : True
+2026-05-07 09:17:06 [DETECT] RESULT: Non-Compliant - Both 'Admin' and 'LocalAdmin' exist. Admin will be disabled.
