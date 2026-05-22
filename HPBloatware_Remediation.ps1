@@ -1,5 +1,5 @@
 # =============================================================================
-# REMEDIATION: HP Bloatware Removal (v3)
+# REMEDIATION: HP Bloatware Removal (v4)
 # Purpose : Remove HP bloatware apps and programs from Windows 11
 # Platform: Microsoft Intune (Proactive Remediation - Remediation Script)
 # Exit 0  : Remediation completed
@@ -7,17 +7,12 @@
 # Log     : C:\Logs\HPBloatware.log
 # Protected: Poly Lens, Poly Camera Pro Compatibility Add-on — never touched
 #
-# Removal order:
-#   Phase 1 - Kill HP Wolf Security processes (bypass self-protection)
-#   Phase 2 - Stop and disable HP services
-#   Phase 3 - Disable HP Wolf Security self-protection via registry
-#   Phase 4 - Remove AppX provisioned packages
-#   Phase 5 - Remove AppX packages (all users)
-#   Phase 6 - Remove standard programs (Get-Package + registry fallback)
-#   Phase 7 - Remove stubborn programs in correct dependency order
-#   Phase 8 - HP Documentation special handling (fixed CMD parsing)
-#   Phase 9 - HP Wolf Security CIM last-resort fallback
-#   Phase 10 - Service and registry cleanup for anything still remaining
+# v4 changes:
+#   - HP Connection Optimizer: post-uninstall registry key cleanup so it
+#     disappears from Programs and Features without requiring a reboot
+#   - HP Documentation: run Doc_Uninstall.cmd with correct working directory,
+#     then force-delete files and registry entry regardless of cmd exit code
+#   - Added reusable Remove-RegistryEntry helper function
 # =============================================================================
 
 $LogPath      = "C:\Logs\HPBloatware.log"
@@ -40,7 +35,6 @@ $TargetPackages = @(
     "AD2F1837.HPEasyClean"
 )
 
-# Standard programs (Get-Package first, registry fallback)
 $StandardPrograms = @(
     "HP Client Security Manager"
     "HP MAC Address Manager"
@@ -58,8 +52,7 @@ $StandardPrograms = @(
     "HP Wolf Security Application Support for Windows"
 )
 
-# Wolf Security — must be removed in this specific dependency order
-# Console and Security Update Service first, then the main product
+# Wolf Security must be removed in this specific dependency order
 $WolfPrograms = @(
     "HP Wolf Security Application Support for Sure Sense"
     "HP Wolf Security Application Support for Windows"
@@ -73,6 +66,11 @@ $RegUninstallPaths = @(
     "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*"
 )
 
+$RegUninstallBases = @(
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
+    "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+)
+
 # -----------------------------------------------------------------------
 function Write-Log {
     param([string]$Message)
@@ -81,6 +79,33 @@ function Write-Log {
         New-Item -Path $LogDir -ItemType Directory -Force | Out-Null
     }
     Add-Content -Path $LogPath -Value "$Timestamp [REMEDIATE] $Message"
+}
+
+# -----------------------------------------------------------------------
+# Finds and deletes all registry uninstall entries matching a display name.
+# This removes the app from Programs and Features immediately without reboot.
+function Remove-RegistryEntry {
+    param([string]$AppName)
+    $Found = $false
+    foreach ($BasePath in $RegUninstallBases) {
+        $Keys = Get-ChildItem $BasePath -ErrorAction SilentlyContinue |
+                Where-Object {
+                    (Get-ItemProperty $_.PSPath -ErrorAction SilentlyContinue).DisplayName -eq $AppName
+                }
+        foreach ($Key in $Keys) {
+            try {
+                Remove-Item -Path $Key.PSPath -Recurse -Force -ErrorAction Stop
+                Write-Log "REG CLEANUP: Removed Programs and Features entry for '$AppName'"
+                $Found = $true
+            }
+            catch {
+                Write-Log "REG CLEANUP WARN: Could not remove registry entry for '$AppName' - $_"
+            }
+        }
+    }
+    if (-not $Found) {
+        Write-Log "REG CLEANUP: No registry entry found for '$AppName' (already clean)"
+    }
 }
 
 # -----------------------------------------------------------------------
@@ -93,15 +118,12 @@ function Stop-DisableService {
             Set-Service -Name $Name -StartupType Disabled -ErrorAction SilentlyContinue
             Write-Log "SERVICE: Stopped and disabled '$Name'"
         }
-        catch {
-            Write-Log "SERVICE WARN: Could not stop/disable '$Name' - $_"
-        }
+        catch { Write-Log "SERVICE WARN: Could not stop/disable '$Name' - $_" }
     }
 }
 
 # -----------------------------------------------------------------------
-# Registry-based uninstall engine — handles MSI, EXE, and CMD uninstall strings.
-# Loops through all registry matches so duplicate installs are all caught.
+# Registry uninstall engine — handles MSI, CMD, and EXE uninstall strings
 function Invoke-RegistryUninstall {
     param(
         [string]$AppName,
@@ -124,7 +146,7 @@ function Invoke-RegistryUninstall {
         Write-Log "REG UNINSTALL: '$AppName' v$($App.DisplayVersion) — $UninstallStr"
 
         try {
-            # --- MSI-based uninstaller ---
+            # --- MSI uninstaller ---
             if ($UninstallStr -match "(?i)msiexec") {
                 if ($UninstallStr -match "\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}") {
                     $GUID    = $Matches[0]
@@ -139,8 +161,7 @@ function Invoke-RegistryUninstall {
                 }
             }
 
-            # --- CMD-based uninstaller (e.g. HP Documentation: CMD /C "...cmd") ---
-            # Fix: detect CMD prefix and pass the full argument to cmd.exe directly
+            # --- CMD uninstaller (e.g. CMD /C "path\script.cmd") ---
             elseif ($UninstallStr -match "^(?i)cmd(?:\.exe)?\s+/[Cc]\s+(.+)$") {
                 $CmdArgs = $Matches[1].Trim()
                 Write-Log "CMD uninstaller detected for '$AppName' — args: $CmdArgs"
@@ -153,7 +174,7 @@ function Invoke-RegistryUninstall {
                 }
             }
 
-            # --- EXE/InstallShield-based uninstaller ---
+            # --- EXE / InstallShield uninstaller ---
             else {
                 if ($UninstallStr -match '^"(.+?)"(.*)$') {
                     $ExePath = $Matches[1]
@@ -165,7 +186,6 @@ function Invoke-RegistryUninstall {
                     $ExeArgs = if ($Parts.Count -gt 1) { $Parts[1] } else { "" }
                 }
 
-                # For InstallShield uninstallers (-runfromtemp), add -s for true silent mode
                 if ($ExeArgs -match "-runfromtemp") {
                     $ExeArgs = "$ExeArgs -s"
                 }
@@ -194,7 +214,6 @@ function Invoke-RegistryUninstall {
 }
 
 # -----------------------------------------------------------------------
-# CIM uninstall — last resort for Wolf Security and other stubborn apps
 function Invoke-CimUninstall {
     param([string]$AppName)
     try {
@@ -216,19 +235,18 @@ function Invoke-CimUninstall {
 }
 
 # =======================================================================
-Write-Log "------- Remediation run started (v3) -------"
+Write-Log "------- Remediation run started (v4) -------"
 Write-Log "Running as: $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)"
 
 try {
     # -------------------------------------------------------------------
-    # Phase 1: Kill HP Wolf Security processes BEFORE stopping services
-    # This is required to weaken self-protection before the uninstall attempts
+    # Phase 1: Kill HP Wolf Security processes before stopping services
     # -------------------------------------------------------------------
     Write-Log "--- Phase 1: Killing HP Wolf Security processes ---"
     $WolfProcesses = @(
-        "hpwsed", "hpwseud", "HPSA_Service", "HpwseIntegration",
-        "HPWSELauncher", "hpwsepolicymanager", "hpwseMgmt",
-        "HP Wolf Security", "HpwseBroker", "hpwsenotif"
+        "hpwsed","hpwseud","HPSA_Service","HpwseIntegration",
+        "HPWSELauncher","hpwsepolicymanager","hpwseMgmt",
+        "HP Wolf Security","HpwseBroker","hpwsenotif"
     )
     foreach ($ProcName in $WolfProcesses) {
         $Running = Get-Process -Name $ProcName -ErrorAction SilentlyContinue
@@ -237,9 +255,7 @@ try {
                 Stop-Process -Name $ProcName -Force -ErrorAction Stop
                 Write-Log "KILLED process: $ProcName"
             }
-            catch {
-                Write-Log "WARN: Could not kill process '$ProcName' - $_"
-            }
+            catch { Write-Log "WARN: Could not kill '$ProcName' - $_" }
         }
     }
 
@@ -261,7 +277,6 @@ try {
 
     # -------------------------------------------------------------------
     # Phase 3: Disable HP Wolf Security self-protection via registry
-    # Running as SYSTEM gives us access to override these keys
     # -------------------------------------------------------------------
     Write-Log "--- Phase 3: Disabling HP Wolf Security self-protection ---"
     $SelfProtectPaths = @(
@@ -272,19 +287,15 @@ try {
     foreach ($RegPath in $SelfProtectPaths) {
         if (Test-Path $RegPath) {
             try {
-                Set-ItemProperty -Path $RegPath -Name "TamperProtection"       -Value 0 -ErrorAction SilentlyContinue
+                Set-ItemProperty -Path $RegPath -Name "TamperProtection"        -Value 0 -ErrorAction SilentlyContinue
                 Set-ItemProperty -Path $RegPath -Name "DisableTamperProtection" -Value 1 -ErrorAction SilentlyContinue
                 Set-ItemProperty -Path $RegPath -Name "SelfProtection"          -Value 0 -ErrorAction SilentlyContinue
                 Set-ItemProperty -Path $RegPath -Name "SelfProtectionEnabled"   -Value 0 -ErrorAction SilentlyContinue
-                Write-Log "Self-protection registry keys set to disabled at: $RegPath"
+                Write-Log "Self-protection disabled at: $RegPath"
             }
-            catch {
-                Write-Log "WARN: Could not modify self-protection at '$RegPath' - $_"
-            }
+            catch { Write-Log "WARN: Could not modify self-protection at '$RegPath' - $_" }
         }
     }
-
-    # Brief pause to let process kills and service stops settle
     Start-Sleep -Seconds 5
 
     # -------------------------------------------------------------------
@@ -293,7 +304,6 @@ try {
     Write-Log "--- Phase 4: Removing AppX provisioned packages ---"
     $ProvPackages = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue |
         Where-Object { ($TargetPackages -contains $_.DisplayName) -or ($_.DisplayName -match "^$HPIdentifier") }
-
     foreach ($pkg in $ProvPackages) {
         try {
             Remove-AppxProvisionedPackage -PackageName $pkg.PackageName -Online -ErrorAction Stop | Out-Null
@@ -308,7 +318,6 @@ try {
     Write-Log "--- Phase 5: Removing AppX packages ---"
     $AppxPackages = Get-AppxPackage -AllUsers -ErrorAction SilentlyContinue |
         Where-Object { ($TargetPackages -contains $_.Name) -or ($_.Name -match "^$HPIdentifier") }
-
     foreach ($pkg in $AppxPackages) {
         try {
             Remove-AppxPackage -Package $pkg.PackageFullName -AllUsers -ErrorAction Stop | Out-Null
@@ -318,7 +327,7 @@ try {
     }
 
     # -------------------------------------------------------------------
-    # Phase 6: Remove standard programs via Get-Package, registry as fallback
+    # Phase 6: Remove standard programs (Get-Package + registry fallback)
     # -------------------------------------------------------------------
     Write-Log "--- Phase 6: Removing standard programs ---"
     foreach ($ProgramName in $StandardPrograms) {
@@ -344,18 +353,29 @@ try {
     }
 
     # -------------------------------------------------------------------
-    # Phase 7: HP Connection Optimizer — registry uninstall with InstallShield fix
+    # Phase 7: HP Connection Optimizer
+    # The InstallShield EXE uninstaller returns exit 0 but leaves the
+    # registry entry until reboot. After it runs, we delete the registry
+    # entry manually so it disappears from Programs and Features immediately.
     # -------------------------------------------------------------------
     Write-Log "--- Phase 7: HP Connection Optimizer ---"
     Invoke-RegistryUninstall -AppName "HP Connection Optimizer"
 
-    # CIM fallback immediately after in case EXE queued reboot-based removal
-    Invoke-CimUninstall -AppName "HP Connection Optimizer"
+    Write-Log "Cleaning up HP Connection Optimizer registry entry (InstallShield staged removal)..."
+    Remove-RegistryEntry -AppName "HP Connection Optimizer"
+
+    # Also clean up the InstallShield installation information folder
+    $ISFolder = "C:\Program Files (x86)\InstallShield Installation Information\{6468C4A5-E47E-405F-B675-A70A70983EA6}"
+    if (Test-Path $ISFolder) {
+        try {
+            Remove-Item -Path $ISFolder -Recurse -Force -ErrorAction Stop
+            Write-Log "CLEANUP: Removed InstallShield folder for HP Connection Optimizer"
+        }
+        catch { Write-Log "WARN: Could not remove InstallShield folder - $_" }
+    }
 
     # -------------------------------------------------------------------
-    # Phase 8: HP Wolf Security — in correct dependency order
-    # Console and support packages first, then Security Update Service, then main
-    # Using REBOOT=ReallySuppress so MSI doesn't abort on pending reboot state
+    # Phase 8: HP Wolf Security in correct dependency order
     # -------------------------------------------------------------------
     Write-Log "--- Phase 8: HP Wolf Security (dependency order) ---"
     foreach ($WolfApp in $WolfPrograms) {
@@ -363,27 +383,50 @@ try {
     }
 
     # -------------------------------------------------------------------
-    # Phase 9: HP Documentation — registry uninstall (CMD prefix now handled correctly)
+    # Phase 9: HP Documentation
+    # Run Doc_Uninstall.cmd with the correct working directory (cmd scripts
+    # often use relative paths). Regardless of exit code, force-delete the
+    # Documentation folder and registry entry — it's files only, no drivers.
     # -------------------------------------------------------------------
     Write-Log "--- Phase 9: HP Documentation ---"
-    $DocCmd = "C:\Program Files\HP\Documentation\Doc_uninstall.cmd"
+    $DocDir = "C:\Program Files\HP\Documentation"
+    $DocCmd = "$DocDir\Doc_Uninstall.cmd"
+
     if (Test-Path $DocCmd) {
         try {
-            Start-Process "cmd.exe" -ArgumentList "/C `"$DocCmd`"" -Wait -NoNewWindow -ErrorAction Stop
-            Write-Log "SUCCESS: HP Documentation removed via Doc_uninstall.cmd"
+            # Use working directory so relative paths in the cmd script resolve correctly
+            $Proc = Start-Process "cmd.exe" `
+                        -ArgumentList "/C `"$DocCmd`"" `
+                        -WorkingDirectory $DocDir `
+                        -Wait -PassThru -NoNewWindow -ErrorAction Stop
+            Write-Log "Doc_Uninstall.cmd exited with code: $($Proc.ExitCode)"
         }
         catch {
-            Write-Log "WARN: Doc_uninstall.cmd failed — trying registry..."
-            Invoke-RegistryUninstall -AppName "HP Documentation"
+            Write-Log "WARN: Doc_Uninstall.cmd threw an exception - $_"
         }
     }
     else {
-        Invoke-RegistryUninstall -AppName "HP Documentation"
+        Write-Log "Doc_Uninstall.cmd not found — proceeding to force cleanup"
     }
 
+    # Force-delete HP Documentation folder regardless of cmd script result
+    # HP Documentation is files only (HTML, PDFs) — safe to force delete
+    if (Test-Path $DocDir) {
+        try {
+            Remove-Item -Path $DocDir -Recurse -Force -ErrorAction Stop
+            Write-Log "CLEANUP: Force-deleted HP Documentation folder '$DocDir'"
+        }
+        catch { Write-Log "WARN: Could not force-delete '$DocDir' - $_" }
+    }
+    else {
+        Write-Log "HP Documentation folder already gone"
+    }
+
+    # Remove the registry entry so it disappears from Programs and Features
+    Remove-RegistryEntry -AppName "HP Documentation"
+
     # -------------------------------------------------------------------
-    # Phase 10: CIM last-resort fallback for Wolf Security and related apps
-    # Only runs if registry uninstall didn't fully remove them
+    # Phase 10: CIM last-resort fallback for Wolf Security
     # -------------------------------------------------------------------
     Write-Log "--- Phase 10: CIM fallback for Wolf Security ---"
     $CimTargets = @(
@@ -398,16 +441,12 @@ try {
     }
 
     # -------------------------------------------------------------------
-    # Phase 11: Service and registry cleanup
-    # For anything still stubbornly showing — remove its registry uninstall
-    # entry and service so it disappears from Programs and Features
-    # and cannot restart
+    # Phase 11: Service and registry cleanup for anything still remaining
     # -------------------------------------------------------------------
     Write-Log "--- Phase 11: Service and registry entry cleanup ---"
-    $ServiceCleanup = @("HP Wolf Security", "HpwseSvc", "HP Security Update Service", "HpwseIntegration")
+    $ServiceCleanup = @("HP Wolf Security","HpwseSvc","HP Security Update Service","HpwseIntegration")
     foreach ($SvcName in $ServiceCleanup) {
-        $Svc = Get-Service -Name $SvcName -ErrorAction SilentlyContinue
-        if ($Svc) {
+        if (Get-Service -Name $SvcName -ErrorAction SilentlyContinue) {
             try {
                 Start-Process "sc.exe" -ArgumentList "delete `"$SvcName`"" -Wait -NoNewWindow -ErrorAction SilentlyContinue
                 Write-Log "CLEANUP: Deleted service entry '$SvcName'"
