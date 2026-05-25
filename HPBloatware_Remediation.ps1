@@ -1,18 +1,16 @@
 # =============================================================================
-# REMEDIATION: HP Bloatware Removal (v4)
+# REMEDIATION: HP Bloatware Removal (v5)
 # Purpose : Remove HP bloatware apps and programs from Windows 11
 # Platform: Microsoft Intune (Proactive Remediation - Remediation Script)
 # Exit 0  : Remediation completed
 # Exit 1  : Remediation failed unexpectedly
 # Log     : C:\Logs\HPBloatware.log
-# Protected: Poly Lens, Poly Camera Pro Compatibility Add-on — never touched
 #
-# v4 changes:
-#   - HP Connection Optimizer: post-uninstall registry key cleanup so it
-#     disappears from Programs and Features without requiring a reboot
-#   - HP Documentation: run Doc_Uninstall.cmd with correct working directory,
-#     then force-delete files and registry entry regardless of cmd exit code
-#   - Added reusable Remove-RegistryEntry helper function
+# v5 changes:
+#   - Added Poly Camera Pro Compatibility Add-on and Poly Lens to removal targets
+#   - Poly Lens: processes killed in Phase 1, service stopped in Phase 2,
+#     then removed via standard registry uninstall in Phase 6
+#   - Removed protected status for Poly apps
 # =============================================================================
 
 $LogPath      = "C:\Logs\HPBloatware.log"
@@ -50,6 +48,8 @@ $StandardPrograms = @(
     "HP Support Assistant"
     "HP Wolf Security Application Support for Sure Sense"
     "HP Wolf Security Application Support for Windows"
+    "Poly Camera Pro Compatibility Add-on"
+    "Poly Lens"
 )
 
 # Wolf Security must be removed in this specific dependency order
@@ -235,14 +235,14 @@ function Invoke-CimUninstall {
 }
 
 # =======================================================================
-Write-Log "------- Remediation run started (v4) -------"
+Write-Log "------- Remediation run started (v5) -------"
 Write-Log "Running as: $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)"
 
 try {
     # -------------------------------------------------------------------
-    # Phase 1: Kill HP Wolf Security processes before stopping services
+    # Phase 1: Kill HP Wolf Security and Poly Lens processes
     # -------------------------------------------------------------------
-    Write-Log "--- Phase 1: Killing HP Wolf Security processes ---"
+    Write-Log "--- Phase 1: Killing HP Wolf Security and Poly Lens processes ---"
     $WolfProcesses = @(
         "hpwsed","hpwseud","HPSA_Service","HpwseIntegration",
         "HPWSELauncher","hpwsepolicymanager","hpwseMgmt",
@@ -259,10 +259,27 @@ try {
         }
     }
 
+    # Kill Poly Lens processes (tray agent and background workers)
+    $PolyProcesses = @(
+        "PolyLens","PolyLensService","PolyLensTray","PolyCameraPro",
+        "PolyLensAgent","PolyLensUpdater","PolyLensCore","PLService",
+        "PolyLensApp","Poly Lens"
+    )
+    foreach ($ProcName in $PolyProcesses) {
+        $Running = Get-Process -Name $ProcName -ErrorAction SilentlyContinue
+        if ($Running) {
+            try {
+                Stop-Process -Name $ProcName -Force -ErrorAction Stop
+                Write-Log "KILLED process: $ProcName"
+            }
+            catch { Write-Log "WARN: Could not kill '$ProcName' - $_" }
+        }
+    }
+
     # -------------------------------------------------------------------
-    # Phase 2: Stop and disable HP services
+    # Phase 2: Stop and disable HP and Poly services
     # -------------------------------------------------------------------
-    Write-Log "--- Phase 2: Stopping HP services ---"
+    Write-Log "--- Phase 2: Stopping HP and Poly services ---"
     Stop-DisableService "HotKeyServiceUWP"
     Stop-DisableService "HPAppHelperCap"
     Stop-DisableService "HP Comm Recover"
@@ -274,6 +291,14 @@ try {
     Stop-DisableService "HP Security Update Service"
     Stop-DisableService "HpwseSvc"
     Stop-DisableService "HpwseIntegration"
+    # Poly Lens service (try common service name variants)
+    Stop-DisableService "PolyLensService"
+    Stop-DisableService "PolyLens"
+    Stop-DisableService "Poly Lens"
+    Stop-DisableService "PolyLensAgent"
+    Stop-DisableService "PolyLensUpdater"
+    Stop-DisableService "PolyLensCore"
+    Stop-DisableService "PLService"
 
     # -------------------------------------------------------------------
     # Phase 3: Disable HP Wolf Security self-protection via registry
@@ -328,6 +353,7 @@ try {
 
     # -------------------------------------------------------------------
     # Phase 6: Remove standard programs (Get-Package + registry fallback)
+    # Includes Poly Camera Pro Compatibility Add-on and Poly Lens
     # -------------------------------------------------------------------
     Write-Log "--- Phase 6: Removing standard programs ---"
     foreach ($ProgramName in $StandardPrograms) {
