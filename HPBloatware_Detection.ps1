@@ -1,5 +1,5 @@
 # =============================================================================
-# DETECTION: HP Bloatware Check
+# DETECTION: HP Bloatware Check (v2)
 # Purpose : Detect presence of HP bloatware apps and programs
 # Platform: Microsoft Intune (Proactive Remediation - Detection Script)
 # Exit 0  : Compliant   - No HP bloatware detected
@@ -7,7 +7,10 @@
 # Log     : C:\Logs\HPBloatware.log
 # Note    : Uses registry-based program detection (fast) instead of
 #           Get-WmiObject Win32_Product (slow, causes MSI reconfiguration)
-# Protected: Poly Lens, Poly Camera Pro Compatibility Add-on - never flagged
+#
+# v2 changes:
+#   - Added Poly Camera Pro Compatibility Add-on and Poly Lens to targets
+#   - Removed protected status for Poly apps
 # =============================================================================
 
 $LogPath      = "C:\Logs\HPBloatware.log"
@@ -52,6 +55,8 @@ $TargetPrograms = @(
     "HP Wolf Security - Console"
     "HP Wolf Security Application Support for Sure Sense"
     "HP Wolf Security Application Support for Windows"
+    "Poly Camera Pro Compatibility Add-on"
+    "Poly Lens"
 )
 
 # Registry paths covering both 32-bit and 64-bit installed programs
